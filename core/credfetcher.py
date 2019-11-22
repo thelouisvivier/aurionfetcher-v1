@@ -26,7 +26,7 @@ def credfetcher(trail):
     options.add_argument("--headless")
 
     #Init driver
-    driver = webdriver.Firefox(options=options, executable_path="/home/louis/aurionfetcher/geckodriver")
+    driver = webdriver.Firefox(options=options)
 
     #Go to login page
     driver.get(aurion_url + "/faces/Login.xhtml")
