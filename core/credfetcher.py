@@ -4,7 +4,7 @@
 
 
 # Credentials
-from config import *
+from config.config import *
 
 #Storage
 from core.storage import *
@@ -12,6 +12,7 @@ from core.storage import *
 # Selenium for Firefox/Chrome control
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.firefox.options import Options
 
 # Sleep
 from time import sleep
@@ -20,10 +21,13 @@ def credfetcher(trail):
 
     #Get informations needed on Aurion : cookie, ViewState
 
-    from selenium.webdriver.firefox.options import Options
     #Headless firefox
+    #options = Options()
+    #options.add_argument("--headless")
+
     options = Options()
-    options.add_argument("--headless")
+    options.headless = True
+
 
     #Init driver
     driver = webdriver.Firefox(options=options)

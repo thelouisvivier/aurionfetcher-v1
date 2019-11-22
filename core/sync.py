@@ -3,7 +3,7 @@
 """
 
 # Credentials
-from config import *
+from config.config import *
 
 # Calddav connection
 import caldav

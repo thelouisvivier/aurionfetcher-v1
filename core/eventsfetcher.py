@@ -4,7 +4,7 @@
 
 
 # Credentials
-from config import *
+from config.config import *
 
 #Storage
 from core.storage import *

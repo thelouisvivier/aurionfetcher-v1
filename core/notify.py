@@ -2,7 +2,7 @@
     Telegram Notifier
 """
 # Credentials
-from config import *
+from config.config import *
 
 # Telegram
 import telegram

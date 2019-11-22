@@ -8,6 +8,8 @@ from core.sync import *
 from core.notify import *
 from core.storage import *
 
+import pause
+
 # On init Storage
 trail = Storage()
 # On récupère les informations de login
