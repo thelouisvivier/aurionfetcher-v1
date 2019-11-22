@@ -27,11 +27,9 @@ Ensuite, quelques modules sont indispensables :
 Enfin, il vous faudra télécharger le driver qui correspond à votre navigateur et le désarchiver dans le répertoire qui contient votre script python (ou bien l'ajouter au PATH).  
 Pour Firefox : [geckodriver](https://github.com/mozilla/geckodriver/releases)
 
----
 
 Ajoutez ensuite vos infos dans le config.py.
 
----
 
 Une fois que tout est prêt, vous pouvez lancer le programme de la manière suivante :
 
