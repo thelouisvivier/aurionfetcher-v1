@@ -21,6 +21,8 @@ RUN FIREFOX_SETUP=firefox-setup.tar.bz2 && \
 
 RUN pip3 install selenium lxml requests caldav ics uuid python-telegram-bot pause
 
+RUN ln -s /usr/src/app/config /config
+
 VOLUME /config
 
 ENV APP_HOME /usr/src/app
