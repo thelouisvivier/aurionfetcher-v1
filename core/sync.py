@@ -19,7 +19,7 @@ import pytz
 # Regex
 import re
 
-def caldavSync(trail,newEvents):
+def caldavSync(trail):
 
     def createICS(deb,fin,matiere,salle,prof,uid):
         e = Event()
@@ -39,11 +39,11 @@ def caldavSync(trail,newEvents):
 
     #Log information
     print("        Check events to add/edit/delete")
-    countFetched = len(newEvents)
-    countEdited = 0
-    countPassed = 0
-    countDeleted = 0
-    editedEvents = []
+    trail._countFetched = len(trail._fetchedEvents)
+    trail._countEdited = 0
+    trail._countPassed = 0
+    trail._countDeleted = 0
+    trail._editedEvents = []
 
     #Loop in existing events
     for actualEvent in calendarCalDav.events():
@@ -58,10 +58,10 @@ def caldavSync(trail,newEvents):
         actualDTSART = re.findall(r"DTSTART:(.*)",actualEvent.data)[0]
         actualDTEND = re.findall(r"DTEND:(.*)",actualEvent.data)[0]
         actualUID = re.findall(r"UID:(.*)",actualEvent.data)[0]
-        founded = 0
+        trail._founded = 0
 
         #Loop in fetched events
-        for newEvent in newEvents:
+        for newEvent in trail._fetchedEvents:
             #Create ics file
             toAdd = createICS(newEvent['debut'],newEvent['fin'],newEvent['cours'],newEvent['salle'],newEvent['prof'],str(uuid4()))
             local_tz = pytz.timezone ("Europe/Paris")
@@ -81,43 +81,33 @@ def caldavSync(trail,newEvents):
                     actualEvent.data = str(vcal)
                     #print(actualEvent.data)
                     actualEvent.save()
-                    editedEvents.append(toEdit)
-                    countEdited+=1
+                    trail._editedEvents.append(toEdit)
+                    trail._countEdited+=1
                 #Delete already checked events
-                founded = 1
-                newEvents.remove(newEvent)
-                countPassed+=1
+                trail._founded = 1
+                trail._fetchedEvents.remove(newEvent)
+                trail._countPassed+=1
                 break
-                #Delete actualevent because not found in newevents
+                #Delete actualevent because not found in trail._fetchedEvents
 
         #If no match, then delete from caldav
-        if (founded == 0):
-            countDeleted+=1
+        if (trail._founded == 0):
+            trail._countDeleted+=1
             actualEvent.delete()
 
-    countAdded = 0
-    addedEvents = []
+    trail._countAdded = 0
+    trail._addedEvents = []
 
     #Add new events
-    for newEvent in newEvents:
+    for newEvent in trail._fetchedEvents:
         vcal = Calendar()
         toAdd = createICS(newEvent['debut'],newEvent['fin'],newEvent['cours'],newEvent['salle'],newEvent['prof'],str(uuid4()))
         vcal.events.add(toAdd)
         calendarCalDav.add_event(str(vcal))
-        addedEvents.append(toAdd)
-        countAdded+=1
+        trail._addedEvents.append(toAdd)
+        trail._countAdded+=1
 
     #Log informations
-    print("        {} total fetched. {} edited. {} deleted. {} passed. {} added.".format(countFetched,countEdited,countDeleted,countPassed,countAdded))
+    print("        {} total fetched. {} edited. {} deleted. {} checked. {} added.".format(trail._countFetched,trail._countEdited,trail._countDeleted,trail._countPassed,trail._countAdded))
     print ("        Sync done !")
-
-    #Make stats for notifier
-    statsResults = {}
-    statsResults["countFetched"] = countFetched
-    statsResults["countEdited"] = countEdited
-    statsResults["countDeleted"] = countDeleted
-    statsResults["countPassed"] = countPassed
-    statsResults["countAdded"] = countAdded
-    statsResults["addedEvents"] = addedEvents
-    statsResults["editedEvents"] = editedEvents
-    return statsResults
+    return True

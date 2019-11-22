@@ -71,7 +71,7 @@ def eventsfetcher(trail):
     #Parse in Json
     events = json.loads(xml.findall(".//update")[1].text)["events"]
 
-    eventsFormatted = []
+    trail._fetchedEvents = []
 
     #Format data
     for i in range(0, len(events)):
@@ -98,6 +98,6 @@ def eventsfetcher(trail):
         tmp[1] = tmp[1].replace(" d' ", ' ')
         #Final formated events
         tmp = {"debut":events[i]["start"], "fin":events[i]["end"], "cours":tmp[1], "salle":tmp[0], "prof":tmp[3]}
-        eventsFormatted.append(tmp)
+        trail._fetchedEvents.append(tmp)
 
-    return eventsFormatted
+    return True

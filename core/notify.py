@@ -12,22 +12,22 @@ from datetime import datetime
 from dateutil.parser import parse
 
 
-def telegramNotifier(trail,returnedStats):
+def telegramNotifier(trail):
 
     now = datetime.now()
 
     #If there are changes, or it's time for dayly notification
-    if (returnedStats["countEdited"] != 0 or returnedStats["countAdded"] != 0 or returnedStats["countDeleted"] != 0) or now.hour ==23:
+    if (trail._countEdited != 0 or trail._countAdded != 0 or trail._countDeleted != 0) or now.hour ==23:
 
         #Init bot
         bot = telegram.Bot(token=telegram_token)
         msgCounter = 0
 
         #Summed informations/stats
-        message = "📥{} ✔️{} ✏️{} 🗑{} ➕{}\n\n".format(returnedStats["countFetched"],returnedStats["countPassed"],returnedStats["countEdited"],returnedStats["countDeleted"],returnedStats["countAdded"])
+        message = "📥{} ✔️{} ✏️{} 🗑{} ➕{}\n\n".format(trail._countFetched,trail._countPassed,trail._countEdited,trail._countDeleted,trail._countAdded)
 
         #Loop in edited events
-        for editedEvent in returnedStats["editedEvents"]:
+        for editedEvent in trail._editedEvents:
             #Check if message is not too long for telegram, else split it
             if (msgCounter > 25):
                 bot.sendMessage(chat_id=telegram_chatid, text=message,parse_mode=telegram.ParseMode.HTML)
@@ -39,7 +39,7 @@ def telegramNotifier(trail,returnedStats):
                 message += "✏️<b>Edited</b>\n{}\n<i>{} à {}\n{}\n{}</i>\n\n".format(editedEvent.name,parse(str(editedEvent.begin)).strftime("%d/%m/%Y de %H:%M"),parse(str(editedEvent.end)).strftime("%H:%M"),editedEvent.location,editedEvent.description)
 
         #Loop in added events
-        for addedEvent in returnedStats["addedEvents"]:
+        for addedEvent in trail._addedEvents:
             #Check if message is not too long for telegram, else split it
             if (msgCounter > 25):
                 bot.sendMessage(chat_id=telegram_chatid, text=message,parse_mode=telegram.ParseMode.HTML)

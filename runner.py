@@ -14,6 +14,6 @@ trail = Storage()
 credfetcher(trail)
 
 # On descend le planning en JSON
-fetchedEvents = eventsfetcher(trail)
-returnedStats = caldavSync(trail,fetchedEvents)
-telegramNotifier(trail,returnedStats)
+eventsfetcher(trail)
+caldavSync(trail)
+telegramNotifier(trail)
