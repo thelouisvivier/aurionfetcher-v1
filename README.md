@@ -38,3 +38,9 @@ Une fois que tout est prêt, vous pouvez lancer le programme de la manière suiv
 ```shell
     python3 runner.py
 ```
+
+---
+
+Pour installer via docker, l'image est disponible ici https://hub.docker.com/r/thelouisvivier/aurionfetcher/
+Montez le dossier /config vers l'emplacement local de votre fichier config.py
+Voilà!
