@@ -8,14 +8,20 @@ from core.sync import *
 from core.notify import *
 from core.storage import *
 
+from datetime import datetime
 import pause
 
-# On init Storage
-trail = Storage()
-# On récupère les informations de login
-credfetcher(trail)
+while True:
+    now = datetime.now()
+    print(now)
+    # On init Storage
+    trail = Storage()
+    # On récupère les informations de login
+    credfetcher(trail)
 
-# On descend le planning en JSON
-eventsfetcher(trail)
-caldavSync(trail)
-telegramNotifier(trail)
+    # On descend le planning en JSON
+    eventsfetcher(trail)
+    caldavSync(trail)
+    telegramNotifier(trail)
+    print("         En pause")
+    pause.minutes(60)
