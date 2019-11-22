@@ -4,8 +4,11 @@ Programme en python permettant de télécharger le planning d'Aurion, synchronis
 
 **thelouisvivier - 2019**  
 
+---
+
 Ce programme est basé sur le travail de Bdeliers disponible à l'adresse suivante : https://github.com/BDeliers/Python-Planning-Aurion
 
+---
 
 Pour utiliser ce programme, il vous faudra installer Python 3 et Pip3 ainsi que Firefox
 
