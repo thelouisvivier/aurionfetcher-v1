@@ -9,7 +9,9 @@ from core.notify import *
 from core.storage import *
 
 from datetime import datetime
-import pause
+
+# Sleep
+from time import sleep
 
 while True:
     now = datetime.now()
@@ -24,4 +26,4 @@ while True:
     caldavSync(trail)
     telegramNotifier(trail)
     print("         En pause")
-    pause.minutes(60)
+    sleep(refresh_every)
