@@ -27,7 +27,7 @@ def caldavSync(trail):
         e.begin = deb
         e.end = fin
         e.location = salle
-        e.description = "{} en {} par {}".format(matiere,salle,prof)
+        e.description = "{} en {} par {}".format(matiere,salle,prof).replace('.','')+"."
         e.uid = uid
         return e
 
@@ -47,14 +47,13 @@ def caldavSync(trail):
 
     #Loop in existing events
     for actualEvent in calendarCalDav.events():
-
         #Parse informations from ics
         if (re.findall(r"SUMMARY:(.*)",actualEvent.data)):
             actualSummary = re.findall(r"SUMMARY:(.*)",actualEvent.data)[0].replace("\\", '')
         else:
             actualSummary = ''
         actualLocation = re.findall(r"LOCATION:(.*)",actualEvent.data)[0]
-        actualDescription = re.findall(r"DESCRIPTION:((.|\n)*)LOCATION",actualEvent.data)[0][0].replace('\n ', '').replace('\r ', '').replace('\n', '').replace('\r', '').replace("\\", '')
+        actualDescription = re.findall(r"DESCRIPTION:([^\.]+)",actualEvent.data)[0].replace('\n ', '').replace('\r ', '').replace('\n', '').replace('\r', '').replace("\\", '')+'.'
         actualDTSART = re.findall(r"DTSTART:(.*)",actualEvent.data)[0]
         actualDTEND = re.findall(r"DTEND:(.*)",actualEvent.data)[0]
         actualUID = re.findall(r"UID:(.*)",actualEvent.data)[0]
