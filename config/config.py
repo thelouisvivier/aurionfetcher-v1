@@ -13,3 +13,6 @@ telegram_chatid = ""
 caldav_url = ""
 caldav_username = ""
 caldav_password = ""
+
+#Refresh Freq
+refresh_every = "" #in seconds
