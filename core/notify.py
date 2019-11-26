@@ -21,34 +21,31 @@ def telegramNotifier(trail):
 
         #Init bot
         bot = telegram.Bot(token=telegram_token)
-        msgCounter = 0
 
         #Summed informations/stats
         message = "📥{} ✔️{} ✏️{} 🗑{} ➕{}\n\n".format(trail._countFetched,trail._countPassed,trail._countEdited,trail._countDeleted,trail._countAdded)
 
         #Loop in edited events
         for editedEvent in trail._editedEvents:
+            temp_message = "✏️<b>Edited</b>\n{}\n<i>{} à {}\n{}\n{}</i>\n\n".format(editedEvent.name,parse(str(editedEvent.begin)).strftime("%d/%m/%Y de %H:%M"),parse(str(editedEvent.end)).strftime("%H:%M"),editedEvent.location,editedEvent.description)
             #Check if message is not too long for telegram, else split it
-            if (msgCounter > 25):
+            if((len(message)+len(temp_message))>4096):
                 bot.sendMessage(chat_id=telegram_chatid, text=message,parse_mode=telegram.ParseMode.HTML)
                 message = ''
-                msgCounter = 1
-                message += "✏️<b>Edited</b>\n{}\n<i>{} à {}\n{}\n{}</i>\n\n".format(editedEvent.name,parse(str(editedEvent.begin)).strftime("%d/%m/%Y de %H:%M"),parse(str(editedEvent.end)).strftime("%H:%M"),editedEvent.location,editedEvent.description)
+                message += temp_message
             else:
-                msgCounter += 1
-                message += "✏️<b>Edited</b>\n{}\n<i>{} à {}\n{}\n{}</i>\n\n".format(editedEvent.name,parse(str(editedEvent.begin)).strftime("%d/%m/%Y de %H:%M"),parse(str(editedEvent.end)).strftime("%H:%M"),editedEvent.location,editedEvent.description)
+                message += temp_message
 
         #Loop in added events
         for addedEvent in trail._addedEvents:
+            temp_message = "➕<b>Added</b>\n{}\n{} à {}\n{}\n<i>{}</i>\n\n".format(addedEvent.name,parse(str(addedEvent.begin)).strftime("%d/%m/%Y de %H:%M"),parse(str(addedEvent.end)).strftime("%H:%M"),addedEvent.location,addedEvent.description)
             #Check if message is not too long for telegram, else split it
-            if (msgCounter > 25):
+            if((len(message)+len(temp_message))>4096):
                 bot.sendMessage(chat_id=telegram_chatid, text=message,parse_mode=telegram.ParseMode.HTML)
                 message = ''
-                msgCounter = 1
-                message += "➕<b>Added</b>\n{}\n{} à {}\n{}\n<i>{}</i>\n\n".format(addedEvent.name,parse(str(addedEvent.begin)).strftime("%d/%m/%Y de %H:%M"),parse(str(addedEvent.end)).strftime("%H:%M"),addedEvent.location,addedEvent.description)
+                message+=temp_message
             else:
-                message += "➕<b>Added</b>\n{}\n{} à {}\n{}\n<i>{}</i>\n\n".format(addedEvent.name,parse(str(addedEvent.begin)).strftime("%d/%m/%Y de %H:%M"),parse(str(addedEvent.end)).strftime("%H:%M"),addedEvent.location,addedEvent.description)
-                msgCounter += 1
+                message+=temp_message
 
         #send message
         bot.sendMessage(chat_id=telegram_chatid, text=message,parse_mode=telegram.ParseMode.HTML)
