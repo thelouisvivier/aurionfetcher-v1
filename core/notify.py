@@ -65,5 +65,5 @@ def telegramNotifier(trail):
 def telegramNotifyOnBoot():
     #Init bot
     bot = telegram.Bot(token=telegram_token)
-    message = "<b>AurionFetcher has started<b>\nGoing to refresh every {} seconds.".format(refresh_every)
+    message = "<b>AurionFetcher has started</b>\nGoing to refresh every {} seconds.".format(refresh_every)
     bot.sendMessage(chat_id=telegram_chatid, text=message,parse_mode=telegram.ParseMode.HTML)
