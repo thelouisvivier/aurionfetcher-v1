@@ -60,3 +60,10 @@ def telegramNotifier(trail):
     else:
         #Log informations
         print("        Nothing Changed. No Notification Sent.")
+
+
+def telegramNotifyOnBoot():
+    #Init bot
+    bot = telegram.Bot(token=telegram_token)
+    message = "<b>AurionFetcher has started<b>\nGoing to refresh every {} seconds.".format(refresh_every)
+    bot.sendMessage(chat_id=telegram_chatid, text=message,parse_mode=telegram.ParseMode.HTML)

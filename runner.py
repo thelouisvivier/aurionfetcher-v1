@@ -13,6 +13,11 @@ from datetime import datetime
 # Sleep
 from time import sleep
 
+
+telegramNotifyOnBoot()
+print("######## Booted ########")
+print("Refresh every : " + refresh_every + "seconds")
+
 while True:
     now = datetime.now()
     print(now)
@@ -25,5 +30,5 @@ while True:
     eventsfetcher(trail)
     caldavSync(trail)
     telegramNotifier(trail)
-    print("         En pause")
+    print("        En pause")
     sleep(refresh_every)
