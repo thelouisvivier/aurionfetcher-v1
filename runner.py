@@ -16,7 +16,7 @@ from time import sleep
 
 telegramNotifyOnBoot()
 print("######## Booted ########")
-print("Refresh every : " + refresh_every + "seconds")
+print("Refresh every : " + str(refresh_every) + "seconds")
 
 while True:
     now = datetime.now()
