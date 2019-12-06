@@ -45,7 +45,7 @@ while True:
         print("        Next run at "+ nextrun)
         sleep(abs(nextrun - now).seconds)
 
-    except BrokenConfigFile:
+    except NameError:
         print('Config file error')
         raise
         telegramNotifyOnError()
