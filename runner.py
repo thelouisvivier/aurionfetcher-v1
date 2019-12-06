@@ -42,7 +42,7 @@ while True:
 
         now = datetime.now()
         nextrun = start_time + timedelta(0,refresh_every)
-        print("        Next run at "+ nextrun)
+        print("        Next run at "+ str(nextrun))
         sleep(abs(nextrun - now).seconds)
 
     except NameError:
