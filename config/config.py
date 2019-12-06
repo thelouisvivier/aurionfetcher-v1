@@ -2,8 +2,8 @@
 aurion_url = ""
 aurion_username = ""
 aurion_password = ""
-aurion_startdate =
-aurion_endate =
+aurion_startdate = 0
+aurion_endate = 0
 
 #Telegram
 telegram_token = ""
