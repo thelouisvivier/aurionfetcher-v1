@@ -61,7 +61,7 @@ def credfetcher(trail):
         while True:
             try:
                 #Click in Schedule tab
-                driver.find_element_by_xpath("//*[contains(text(), 'My Schedule')]").click()
+                driver.find_element_by_xpath("//*[contains(text(), 'Mon Planning')]").click()
                 break
             except:
                 sleep(1)
