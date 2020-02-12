@@ -2,7 +2,7 @@ FROM ubuntu:bionic
 
 RUN apt-get update
 
-RUN apt-get upgrade
+RUN apt-get -y upgrade
 
 RUN apt-get install -y python3 python3-pip python3-dev unzip wget curl xvfb fonts-liberation libappindicator3-1 libasound2 libatk-bridge2.0-0 libnspr4 libnss3 lsb-release xdg-utils libxss1 libdbus-glib-1-2
 
