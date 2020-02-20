@@ -24,10 +24,12 @@ def credfetcher(trail):
         #Headless firefox
         options = Options()
         options.headless = True
-
+        
+        profile = webdriver.FirefoxProfile()
+        profile.set_preference('intl.accept_languages', 'fr-FR, fr')
 
         #Init driver
-        driver = webdriver.Firefox(options=options)
+        driver = webdriver.Firefox(firefox_profile=profile,options=options)
 
         #Go to login page
         driver.get(aurion_url + "/faces/Login.xhtml")
