@@ -96,6 +96,14 @@ def eventsfetcher(trail):
             tmp[1] = tmp[1].replace("Cours d'", '')
             tmp[1] = tmp[1].replace(" de ", ' ')
             tmp[1] = tmp[1].replace(" d' ", ' ')
+            
+            #Check if it's a test
+            try:
+                events[i]["className"]
+            except NameError:
+            else:
+                tmp[1] = "🎓"+tmp[1]
+            
             #Final formated events
             tmp = {"debut":events[i]["start"], "fin":events[i]["end"], "cours":tmp[1], "salle":tmp[0], "prof":tmp[3]}
             trail._fetchedEvents.append(tmp)
