@@ -101,6 +101,7 @@ def eventsfetcher(trail):
             try:
                 events[i]["className"]
             except NameError:
+                
             else:
                 tmp[1] = "🎓"+tmp[1]
             
