@@ -1,4 +1,4 @@
-"""
+or"""
     Aurion Events Fetcher
 """
 import sys
@@ -100,8 +100,8 @@ def eventsfetcher(trail):
             #Check if it's a test
             try:
                 events[i]["className"]
-            except NameError:
-                1+1
+            except KeyError:
+                pass
             else:
                 tmp[1] = "🎓"+tmp[1]
             
