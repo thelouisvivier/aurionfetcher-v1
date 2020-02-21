@@ -1,4 +1,4 @@
-or"""
+"""
     Aurion Events Fetcher
 """
 import sys
