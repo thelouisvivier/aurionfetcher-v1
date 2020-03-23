@@ -1,5 +1,9 @@
 # AurionFetcher
 
+## 🔴 Developpement arrêté 🔴
+## Vous trouverez ici le projet le remplaçant : https://github.com/thelouisvivier/aurionfetcherjs
+
+
 Programme en python permettant de télécharger le planning d'Aurion, synchroniser les événements sur un serveur CalDav, et notifier l'utilisateur sur telegram en cas de changements.  
 
 **thelouisvivier - 2019**  
